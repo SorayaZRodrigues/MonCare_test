@@ -1,0 +1,19 @@
+{
+  "name": "home-healthcare-api",
+  "version": "1.0.0",
+  "description": "Beginner-friendly REST API for non-emergency home healthcare",
+  "main": "src/server.js",
+  "scripts": {
+    "start": "node src/server.js",
+    "dev": "node src/server.js",
+    "test": "echo \"No tests yet. Add Mocha/Chai/Supertest specs.\""
+  },
+  "keywords": ["node", "express", "jwt", "qa-practice"],
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "express": "^4.19.2",
+    "jsonwebtoken": "^9.0.2"
+  }
+}
