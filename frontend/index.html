@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>MonCare | Cuidado que te acompanha</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div id="app" class="app-shell">
+      <!-- Top bar is shown only after login -->
+      <header id="topbar" class="topbar hidden">
+        <div class="brand-inline">
+          <span class="brand-dot"></span>
+          <strong>MonCare</strong>
+        </div>
+        <button id="logoutBtn" class="btn btn-outline">Sair</button>
+      </header>
+
+      <!-- Global message area for success/error/loading feedback -->
+      <p id="globalMessage" class="global-message" aria-live="polite"></p>
+
+      <!-- 1) Welcome / Login screen -->
+      <section id="view-login" class="view active">
+        <div class="card auth-card">
+          <div class="logo-wrap" aria-label="Logo MonCare">
+            <!-- Simple inline SVG logo with house + stethoscope + cross -->
+            <svg viewBox="0 0 220 120" role="img" aria-label="Logo MonCare">
+              <path d="M40 60 L80 28 L120 60" fill="none" stroke="#1E7D5B" stroke-width="6" stroke-linecap="round" stroke-linejoin="round" />
+              <rect x="52" y="60" width="56" height="34" rx="8" fill="#F8F9F7" stroke="#1E7D5B" stroke-width="4" />
+              <rect x="72" y="70" width="16" height="16" fill="#FFFFFF" stroke="#D4AF37" stroke-width="3" />
+              <line x1="80" y1="74" x2="80" y2="82" stroke="#D4AF37" stroke-width="3" />
+              <line x1="76" y1="78" x2="84" y2="78" stroke="#D4AF37" stroke-width="3" />
+              <path d="M136 42 c16 0 24 10 24 20 v14 c0 9 5 14 14 14" fill="none" stroke="#2EAF7D" stroke-width="6" stroke-linecap="round" />
+              <circle cx="177" cy="90" r="10" fill="none" stroke="#1E7D5B" stroke-width="5" />
+              <circle cx="136" cy="40" r="4" fill="#D4AF37" />
+            </svg>
+          </div>
+          <h1>MonCare</h1>
+          <p class="tagline">Cuidado que te acompanha</p>
+
+          <form id="loginForm" class="form">
+            <label for="loginEmail">E-mail</label>
+            <input id="loginEmail" name="email" type="email" required placeholder="voce@email.com" />
+
+            <label for="loginPassword">Senha</label>
+            <input id="loginPassword" name="password" type="password" required placeholder="Sua senha" />
+
+            <button type="submit" class="btn">Entrar</button>
+          </form>
+
+          <p class="helper-text">
+            Ainda não possui conta?
+            <a href="#" data-nav="register">Cadastrar paciente</a>
+          </p>
+        </div>
+      </section>
+
+      <!-- 2) Patient registration screen -->
+      <section id="view-register" class="view">
+        <div class="card auth-card">
+          <h2>Cadastro de paciente</h2>
+          <form id="registerForm" class="form">
+            <label for="registerName">Nome</label>
+            <input id="registerName" name="name" type="text" required />
+
+            <label for="registerEmail">E-mail</label>
+            <input id="registerEmail" name="email" type="email" required />
+
+            <label for="registerPassword">Senha</label>
+            <input id="registerPassword" name="password" type="password" minlength="6" required />
+
+            <label for="confirmPassword">Confirmar senha</label>
+            <input id="confirmPassword" name="confirmPassword" type="password" minlength="6" required />
+
+            <button type="submit" class="btn">Cadastrar</button>
+          </form>
+
+          <p class="helper-text">
+            Já tem conta?
+            <a href="#" data-nav="login">Fazer login</a>
+          </p>
+        </div>
+      </section>
+
+      <!-- 3) Dashboard -->
+      <section id="view-dashboard" class="view">
+        <div class="card">
+          <h2 id="greetingTitle">Olá!</h2>
+          <p class="soft-text">Bem-vindo ao seu painel MonCare.</p>
+        </div>
+
+        <div class="grid cards-grid">
+          <article class="card service-shortcut" data-nav="services">
+            <h3>Serviços</h3>
+            <p>Veja todos os atendimentos disponíveis.</p>
+          </article>
+          <article class="card service-shortcut" data-nav="create-appointment">
+            <h3>Novo atendimento</h3>
+            <p>Solicite uma visita domiciliar de forma rápida.</p>
+          </article>
+          <article class="card service-shortcut" data-nav="my-appointments">
+            <h3>Meus atendimentos</h3>
+            <p>Acompanhe status e histórico dos seus pedidos.</p>
+          </article>
+        </div>
+
+        <div class="card">
+          <h3>Atendimento recente</h3>
+          <div id="recentAppointment" class="appointment-placeholder">Nenhum atendimento recente.</div>
+        </div>
+      </section>
+
+      <!-- 4) Services screen -->
+      <section id="view-services" class="view">
+        <div class="card">
+          <h2>Serviços disponíveis</h2>
+          <p class="soft-text">Dados carregados do endpoint <code>GET /services</code>.</p>
+        </div>
+        <div id="servicesList" class="grid cards-grid"></div>
+      </section>
+
+      <!-- 5) Create appointment screen -->
+      <section id="view-create-appointment" class="view">
+        <div class="card">
+          <h2>Solicitar atendimento</h2>
+          <form id="appointmentForm" class="form">
+            <label for="serviceSelect">Selecione o serviço</label>
+            <select id="serviceSelect" required>
+              <option value="">Carregando serviços...</option>
+            </select>
+
+            <label for="symptomsText">Sintomas / observações</label>
+            <textarea
+              id="symptomsText"
+              rows="4"
+              placeholder="Exemplo: tontura, dor de cabeça, pressão alta"
+            ></textarea>
+
+            <button type="submit" class="btn">Criar solicitação</button>
+          </form>
+        </div>
+      </section>
+
+      <!-- 6) My appointments screen -->
+      <section id="view-my-appointments" class="view">
+        <div class="card">
+          <h2>Meus atendimentos</h2>
+          <p class="soft-text">Acompanhe os status: pending, matched, completed ou cancelled.</p>
+        </div>
+        <div id="appointmentsList" class="grid cards-grid"></div>
+      </section>
+
+      <!-- Bottom nav for mobile-first experience -->
+      <nav id="bottomNav" class="bottom-nav hidden">
+        <button data-nav="dashboard">Início</button>
+        <button data-nav="services">Serviços</button>
+        <button data-nav="create-appointment">Agendar</button>
+        <button data-nav="my-appointments">Atendimentos</button>
+      </nav>
+    </div>
+
+    <script src="script.js"></script>
+  </body>
+</html>
