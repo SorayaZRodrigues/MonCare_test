@@ -4,15 +4,15 @@ const ROLES = {
   ADMIN: 'admin'
 };
 
-const PROFESSIONS = ['doctor', 'nurse', 'nutritionist'];
+const PROFESSIONS = ['doutor', 'enfermeira', 'nutricionista'];
 
 const APPOINTMENT_STATUS = {
-  PENDING: 'pending',
-  MATCHED: 'matched',
-  ON_THE_WAY: 'on_the_way',
-  COMPLETED: 'completed',
-  CANCELLED: 'cancelled',
-  BLOCKED_EMERGENCY: 'blocked_emergency'
+  PENDING: 'pendente',
+  MATCHED: 'correspondida',
+  ON_THE_WAY: 'a caminho',
+  COMPLETED: 'concluida',
+  CANCELLED: 'canceladp',
+  BLOCKED_EMERGENCY: 'emergência_bloqueada'
 };
 
 const ACTIVE_STATUSES = [
@@ -28,12 +28,12 @@ const TIME_WINDOWS = [
 ];
 
 const EMERGENCY_SYMPTOMS = [
-  'chest pain',
-  'severe shortness of breath',
-  'heavy bleeding',
-  'seizure',
-  'loss of consciousness',
-  'stroke symptoms'
+  'dor no peito',
+  'falta de ar',
+  'sangramento intenso',
+  'convulsão',
+  'perda de consciência',
+  'sintomas de AVC'
 ];
 
 module.exports = {

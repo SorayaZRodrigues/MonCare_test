@@ -8,7 +8,7 @@ function validateRequiredFields(fields) {
 
     if (missingFields.length > 0) {
       return res.status(400).json({
-        message: 'Missing required fields',
+        message: 'Campos obrigatórios ausentes',
         missingFields
       });
     }

@@ -22,10 +22,10 @@ async function registerProfessionalController(req, res) {
 async function loginController(req, res) {
   const { email, password } = req.body;
   const user = findByEmail(email);
-  if (!user) return res.status(401).json({ message: 'Invalid credentials' });
+  if (!user) return res.status(401).json({ message: 'Credenciais inválidas' });
 
   const isValidPassword = await bcrypt.compare(password, user.passwordHash);
-  if (!isValidPassword) return res.status(401).json({ message: 'Invalid credentials' });
+  if (!isValidPassword) return res.status(401).json({ message: 'Credenciais inválidas' });
 
   const token = signToken(user);
   return res.json({ token, user: sanitizeUser(user) });

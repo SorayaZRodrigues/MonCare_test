@@ -6,13 +6,13 @@ function allowSelfOrAdmin(paramName = 'id') {
     if (req.user.role === 'admin' || req.user.id === resourceId) {
       return next();
     }
-    return res.status(403).json({ message: 'Forbidden' });
+    return res.status(403).json({ message: 'Proibido' });
   };
 }
 
 function attachPatientFromToken(req, res, next) {
   const patient = users.find((u) => u.id === req.user.id && u.role === 'patient');
-  if (!patient) return res.status(403).json({ message: 'Only patients can request appointments' });
+  if (!patient) return res.status(403).json({ message: 'Somente pacientes podem solicitar agendamentos.' });
   req.contextPatient = patient;
   return next();
 }

@@ -3,7 +3,7 @@ const { users } = require('../data/store');
 function getPatient(req, res) {
   const id = Number(req.params.id);
   const patient = users.find((u) => u.id === id && u.role === 'patient');
-  if (!patient) return res.status(404).json({ message: 'Patient not found' });
+  if (!patient) return res.status(404).json({ message: 'Paciente não encontrado' });
 
   const { passwordHash, ...safePatient } = patient;
   return res.json(safePatient);
@@ -12,7 +12,7 @@ function getPatient(req, res) {
 function updatePatient(req, res) {
   const id = Number(req.params.id);
   const patient = users.find((u) => u.id === id && u.role === 'patient');
-  if (!patient) return res.status(404).json({ message: 'Patient not found' });
+  if (!patient) return res.status(404).json({ message: 'Paciente não encontrado' });
 
   patient.name = req.body.name ?? patient.name;
   patient.phone = req.body.phone ?? patient.phone;

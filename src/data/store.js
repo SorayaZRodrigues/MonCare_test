@@ -2,11 +2,11 @@
 // You can later swap this file with a real database implementation.
 
 const services = [
-  { id: 1, name: 'wound dressing change', allowedRoles: ['nurse', 'doctor'] },
-  { id: 2, name: 'prescription renewal', allowedRoles: ['doctor'] },
-  { id: 3, name: 'medical certificate renewal', allowedRoles: ['doctor'] },
-  { id: 4, name: 'nutrition consultation', allowedRoles: ['nutritionist'] },
-  { id: 5, name: 'blood pressure check', allowedRoles: ['nurse', 'doctor'] }
+  { id: 1, name: 'Troca de Curativo', allowedRoles: ['nurse', 'doctor'] },
+  { id: 2, name: 'Renovação de prescrição', allowedRoles: ['doctor'] },
+  { id: 3, name: 'Renovação de atestado médico', allowedRoles: ['doctor'] },
+  { id: 4, name: 'Consulta de Nutrição', allowedRoles: ['nutritionist'] },
+  { id: 5, name: 'Aferição de pressão', allowedRoles: ['nurse', 'doctor'] }
 ];
 
 const users = [

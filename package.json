@@ -8,12 +8,20 @@
     "dev": "node src/server.js",
     "test": "echo \"No tests yet. Add Mocha/Chai/Supertest specs.\""
   },
-  "keywords": ["node", "express", "jwt", "qa-practice"],
+  "keywords": [
+    "node",
+    "express",
+    "jwt",
+    "qa-practice"
+  ],
   "author": "",
   "license": "MIT",
   "dependencies": {
     "bcryptjs": "^2.4.3",
+    "cors": "^2.8.6",
     "express": "^4.19.2",
-    "jsonwebtoken": "^9.0.2"
+    "jsonwebtoken": "^9.0.2",
+    "swagger-jsdoc": "^6.2.8",
+    "swagger-ui-express": "^5.0.1"
   }
 }

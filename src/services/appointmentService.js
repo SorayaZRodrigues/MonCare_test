@@ -38,19 +38,19 @@ function findCompatibleProfessional(service, area) {
 function createAppointment({ patient, serviceName, area, window, symptoms }) {
   const service = findServiceByName(serviceName);
   if (!service) {
-    return { error: 'Service not found', status: 404 };
+    return { error: 'Serviço não encontrado', status: 404 };
   }
 
   if (!TIME_WINDOWS.includes(window)) {
-    return { error: 'Invalid time window', status: 400 };
+    return { error: 'Tempo invalido', status: 400 };
   }
 
   if (!patient.address) {
-    return { error: 'Patient must save an address before requesting service', status: 400 };
+    return { error: 'O paciente deve salvar um endereço antes de solicitar o serviço.', status: 400 };
   }
 
   if (hasActiveAppointment(patient.id)) {
-    return { error: 'Patient already has an active appointment', status: 409 };
+    return { error: 'O paciente já possui uma consulta agendada.', status: 409 };
   }
 
   if (isEmergency(symptoms)) {
@@ -68,7 +68,7 @@ function createAppointment({ patient, serviceName, area, window, symptoms }) {
     appointments.push(blockedAppointment);
     return {
       error:
-        'Emergency symptoms detected. This non-emergency app cannot process this request. Please contact emergency services.',
+        'Sintomas de emergência detectados. Este aplicativo não emergencial não pode processar esta solicitação. Entre em contato com os serviços de emergência..',
       status: 403,
       blockedAppointment
     };
@@ -77,7 +77,7 @@ function createAppointment({ patient, serviceName, area, window, symptoms }) {
   const professional = findCompatibleProfessional(service, area);
   if (!professional) {
     return {
-      error: 'No compatible professional available in this service area',
+      error: 'Não há profissional compatível disponível nesta área de atendimento.',
       status: 409
     };
   }

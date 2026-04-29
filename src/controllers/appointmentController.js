@@ -29,7 +29,7 @@ function postAppointment(req, res) {
 function getAppointmentById(req, res) {
   const id = Number(req.params.id);
   const appointment = appointments.find((a) => a.id === id);
-  if (!appointment) return res.status(404).json({ message: 'Appointment not found' });
+  if (!appointment) return res.status(404).json({ message: 'Consulta não encontrada' });
 
   // Access: admin, patient owner, or assigned professional.
   const canAccess =
@@ -37,7 +37,7 @@ function getAppointmentById(req, res) {
     appointment.patientId === req.user.id ||
     appointment.professionalId === req.user.id;
 
-  if (!canAccess) return res.status(403).json({ message: 'Forbidden' });
+  if (!canAccess) return res.status(403).json({ message: 'Proibido' });
   return res.json(appointment);
 }
 
@@ -45,18 +45,18 @@ function patchAppointmentStatus(req, res) {
   const id = Number(req.params.id);
   const { status } = req.body;
   const appointment = appointments.find((a) => a.id === id);
-  if (!appointment) return res.status(404).json({ message: 'Appointment not found' });
+  if (!appointment) return res.status(404).json({ message: 'Consulta não encontrada' });
 
   const validStatuses = Object.values(APPOINTMENT_STATUS);
   if (!validStatuses.includes(status)) {
-    return res.status(400).json({ message: 'Invalid status value' });
+    return res.status(400).json({ message: 'Valor de status inválido' });
   }
 
   const canUpdate =
     req.user.role === ROLES.ADMIN ||
     (req.user.role === ROLES.PROFESSIONAL && appointment.professionalId === req.user.id);
 
-  if (!canUpdate) return res.status(403).json({ message: 'Forbidden' });
+  if (!canUpdate) return res.status(403).json({ message: 'Proibido' });
 
   appointment.status = status;
   return res.json(appointment);
@@ -65,10 +65,10 @@ function patchAppointmentStatus(req, res) {
 function cancelAppointment(req, res) {
   const id = Number(req.params.id);
   const appointment = appointments.find((a) => a.id === id);
-  if (!appointment) return res.status(404).json({ message: 'Appointment not found' });
+  if (!appointment) return res.status(404).json({ message: 'Consulta não encontrada' });
 
   const canCancel = req.user.role === ROLES.ADMIN || appointment.patientId === req.user.id;
-  if (!canCancel) return res.status(403).json({ message: 'Forbidden' });
+  if (!canCancel) return res.status(403).json({ message: 'Proibido' });
 
   appointment.status = APPOINTMENT_STATUS.CANCELLED;
   return res.json(appointment);

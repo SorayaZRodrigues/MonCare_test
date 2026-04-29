@@ -3,7 +3,7 @@ const { users } = require('../data/store');
 function getProfessional(req, res) {
   const id = Number(req.params.id);
   const professional = users.find((u) => u.id === id && u.role === 'professional');
-  if (!professional) return res.status(404).json({ message: 'Professional not found' });
+  if (!professional) return res.status(404).json({ message: 'Profissional não encontrado' });
 
   const { passwordHash, ...safeProfessional } = professional;
   return res.json(safeProfessional);
@@ -12,7 +12,7 @@ function getProfessional(req, res) {
 function updateProfessional(req, res) {
   const id = Number(req.params.id);
   const professional = users.find((u) => u.id === id && u.role === 'professional');
-  if (!professional) return res.status(404).json({ message: 'Professional not found' });
+  if (!professional) return res.status(404).json({ message: 'Profissional não encontrado' });
 
   professional.name = req.body.name ?? professional.name;
   professional.serviceAreas = req.body.serviceAreas ?? professional.serviceAreas;
@@ -24,7 +24,7 @@ function updateProfessional(req, res) {
 function patchAvailability(req, res) {
   const id = Number(req.params.id);
   const professional = users.find((u) => u.id === id && u.role === 'professional');
-  if (!professional) return res.status(404).json({ message: 'Professional not found' });
+  if (!professional) return res.status(404).json({ message: 'Profissional não encontrado' });
 
   if (typeof req.body.available !== 'boolean') {
     return res.status(400).json({ message: 'available must be boolean' });
@@ -38,7 +38,7 @@ function patchAvailability(req, res) {
 function approveProfessional(req, res) {
   const id = Number(req.params.id);
   const professional = users.find((u) => u.id === id && u.role === 'professional');
-  if (!professional) return res.status(404).json({ message: 'Professional not found' });
+  if (!professional) return res.status(404).json({ message: 'Profissional não encontrado' });
 
   professional.approved = true;
   const { passwordHash, ...safeProfessional } = professional;

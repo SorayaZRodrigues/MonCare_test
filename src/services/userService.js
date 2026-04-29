@@ -15,7 +15,7 @@ function sanitizeUser(user) {
 async function registerPatient(data) {
   const existing = findByEmail(data.email);
   if (existing) {
-    return { error: 'Email already in use', status: 409 };
+    return { error: 'Este e-mail já está sendo usado', status: 409 };
   }
 
   const passwordHash = await bcrypt.hash(data.password, 10);
@@ -35,12 +35,12 @@ async function registerPatient(data) {
 
 async function registerProfessional(data) {
   if (!PROFESSIONS.includes(data.profession)) {
-    return { error: 'Invalid profession. Use doctor, nurse, or nutritionist.', status: 400 };
+    return { error: 'Profissão invalida. Use doutor, enfermeira, ou nutricionista.', status: 400 };
   }
 
   const existing = findByEmail(data.email);
   if (existing) {
-    return { error: 'Email already in use', status: 409 };
+    return { error: 'Este e-mail já está sendo usado', status: 409 };
   }
 
   const passwordHash = await bcrypt.hash(data.password, 10);

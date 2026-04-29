@@ -5,7 +5,7 @@ const { JWT_SECRET } = require('../utils/jwt');
 function authenticate(req, res, next) {
   const authHeader = req.headers.authorization;
   if (!authHeader || !authHeader.startsWith('Bearer ')) {
-    return res.status(401).json({ message: 'Missing or invalid Authorization header' });
+    return res.status(401).json({ message: 'Cabeçalho de autorização ausente ou inválido' });
   }
 
   const token = authHeader.split(' ')[1];
@@ -13,7 +13,7 @@ function authenticate(req, res, next) {
     req.user = jwt.verify(token, JWT_SECRET);
     return next();
   } catch (error) {
-    return res.status(401).json({ message: 'Invalid or expired token' });
+    return res.status(401).json({ message: 'Token inválido ou expirado' });
   }
 }
 
@@ -21,7 +21,7 @@ function authenticate(req, res, next) {
 function authorize(...allowedRoles) {
   return (req, res, next) => {
     if (!req.user || !allowedRoles.includes(req.user.role)) {
-      return res.status(403).json({ message: 'Forbidden: insufficient permissions' });
+      return res.status(403).json({ message: 'Proibido: permissões insuficientes' });
     }
     return next();
   };

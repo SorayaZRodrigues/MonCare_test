@@ -1,4 +1,8 @@
+const swaggerUi = require('swagger-ui-express');
+const swaggerSpec = require('./docs/swagger');
+
 const express = require('express');
+const cors = require('cors');
 
 const authRoutes = require('./routes/authRoutes');
 const serviceRoutes = require('./routes/serviceRoutes');
@@ -10,6 +14,7 @@ const { errorHandler } = require('./middleware/errorMiddleware');
 
 const app = express();
 
+app.use(cors());
 app.use(express.json());
 
 app.get('/', (req, res) => {
@@ -23,6 +28,7 @@ app.use('/professionals', professionalRoutes);
 app.use('/appointments', appointmentRoutes);
 app.use('/admin', adminRoutes);
 
+app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec));
 // 404 handler for unknown routes.
 app.use((req, res) => {
   res.status(404).json({ message: 'Route not found' });
